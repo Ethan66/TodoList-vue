@@ -1,6 +1,5 @@
 <template>
   <div id="date">
-    <!--<img src="../assets/mountain.jpeg" />-->
     <div class="e-img">
       <!--<p class="e-showDate">
           <i class="e-arrow e-left"><</i>
