@@ -217,6 +217,7 @@
     background: #fff; overflow: hidden;
     >.e-img{
       padding: 85px 0 55px; background: url(../assets/mountain.jpeg) no-repeat; background-position: -300px -180px;
+      margin-top: -20px;
     }
     .e-showDate{
       text-align: center; color: #fff; font-size: 28px; position: relative;
@@ -235,7 +236,7 @@
       }
     }
     .e-date{
-      padding: 16px;
+      padding: 8px 16px;
       .e-table{
         width: 100%;
         th{
