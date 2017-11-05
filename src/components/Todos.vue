@@ -4,7 +4,7 @@
     <ol>
       <li class="completed">
         <input type="checkbox"  />
-        <i class="date">13.00</i>
+        <i class="time">13.00</i>
         <span>学习交互设计</span>
         <p class="delete">
           <svg class="icon" aria-hidden="true">
@@ -14,7 +14,7 @@
       </li>
       <li class="deleting">
         <input type="checkbox"  />
-        <i class="date">13.00</i>
+        <i class="time">13.00</i>
         <span>学习交互设计</span>
         <p class="delete">
           <svg class="icon" aria-hidden="true">
@@ -24,7 +24,7 @@
       </li>
       <li>
         <input type="checkbox"  />
-        <i class="date">13.00</i>
+        <i class="time">13.00</i>
         <span>学习交互设计</span>
         <p class="delete">
           <svg class="icon" aria-hidden="true">
@@ -34,7 +34,7 @@
       </li>
       <li>
         <input type="checkbox"  />
-        <i class="date">13.00</i>
+        <i class="time">13.00</i>
         <span>学习交互设计</span>
         <p class="delete">
           <svg class="icon" aria-hidden="true">
@@ -43,14 +43,16 @@
         </p>
       </li>
     </ol>
-    <div class="btn">
-      <p>+</p>
+    <div class="btn" v-on:click="show.show=true">
+      <p >+</p>
     </div>
   </div>
 </template>
 
 <script>
-
+  export default{
+      props:['show']
+  }
 </script>
 
 <style lang='scss'>

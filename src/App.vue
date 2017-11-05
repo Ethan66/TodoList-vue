@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <Date v-bind:dateCst="dateCst" />
-    <Todos />
+    <Todos  v-bind:show="showInput"/>
+    <InputTodo class="inputTodo" v-show="showInput.show" v-bind:show="showInput" />
   </div>
 </template>
 
@@ -9,14 +10,16 @@
   import Date from './components/Date.vue'
   import Todos from './components/Todos'
   import Date1 from './components/Date-module'
+  import InputTodo from './components/InputTodo'
 export default {
   name: 'app',
   components:{
-      Date,Todos
+      Date,Todos,InputTodo
   },
   data(){
     return {
-      dateCst:Date1.dateConstructor
+      dateCst:Date1.dateConstructor,
+      showInput:{show:false}
     }
   },
   created(){
@@ -40,6 +43,9 @@ export default {
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+}
+.inputTodo{
+
 }
 }
 </style>
