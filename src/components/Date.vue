@@ -1,13 +1,21 @@
 <template>
   <div id="date">
     <div class="e-img">
-      <!--<p class="e-showDate">
-          <i class="e-arrow e-left"><</i>
-          <span class='e-show'>2017-08</span>
-          <i class="e-arrow e-right">></i>
-      </p>-->
+      <p class="e-showDate">
+          <i class="e-arrow e-left" v-on:click="movePreMonth"><</i>
+          <span class='e-show'>{{dateCst.watchDate.getFullYear()}}-{{dateCst.watchDate.getMonth()+1}}</span>
+          <i class="e-arrow e-right" v-on:click="moveNextMonth">></i>
+      </p>
     </div>
     <div class="e-date">
+      <table class="e-table">
+        <tr><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></tr>
+        <tr v-for="i1 in arr">
+          <td v-for="i in [0,1,2,3,4,5,6]" v-bind:class="dateCst.dateArr[i1*7+i]['type']" v-bind:data-date="dateCst.dateArr[i1*7+i]['fullDate']">
+            {{dateCst.dateArr[i1*7+i]['date']}}
+          </td>
+        </tr>
+      </table>
       <!--<table class="e-table">
       <tr>
       <th>日</th>
@@ -63,7 +71,7 @@
   import $ from "jquery"
 
   export default{
-      mounted(){
+      /*mounted(){
         var DatePicker=(function(){
 
           var Date1=function($ct,$ctPrev){
@@ -207,7 +215,32 @@
           }
         })();
         DatePicker.init($(".e-date"));
+      }*/
+      props:['dateCst'],
+      data(){
+        return {
+          arr: this.arrLength(this.dateCst.dateArr)
+        }
+      },
+    methods:{
+      arrLength(date){
+          let arr=[]
+          for(let i=0;i<date.length/7;i++){
+              arr.push(i)
+          }
+          return arr
+      },
+      movePreMonth(){
+        this.dateCst.watchDate=this.dateCst.preMonthDate;
+        this.dateCst.setRelativeDate(this.dateCst.watchDate);
+        this.dateCst.setData();
+      },
+      moveNextMonth(){
+        this.dateCst.watchDate=this.dateCst.nextMonthDate;
+        this.dateCst.setRelativeDate(this.dateCst.watchDate);
+        this.dateCst.setData();
       }
+    }
   }
 </script>
 

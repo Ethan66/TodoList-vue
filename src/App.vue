@@ -1,15 +1,14 @@
 <template>
   <div id="app">
-    <Date />
-    {{d}}
+    <Date v-bind:dateCst="dateCst" />
     <Todos />
   </div>
 </template>
 
 <script>
-  import Date from './components/Date'
+  import Date from './components/Date.vue'
   import Todos from './components/Todos'
-  import date from './components/Date.js'
+  import Date1 from './components/Date-module'
 export default {
   name: 'app',
   components:{
@@ -17,7 +16,7 @@ export default {
   },
   data(){
     return {
-        d:date
+      dateCst:Date1.dateConstructor
     }
   },
   created(){
