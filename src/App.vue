@@ -2,7 +2,7 @@
   <div id="app">
     <Date v-bind:dateCst="dateCst" />
     <Todos  v-bind:show="showInput"/>
-    <InputTodo class="inputTodo" v-show="showInput.show" v-bind:show="showInput" />
+    <InputTodo class="inputTodo" v-show="showInput.show" v-bind:show="showInput" v-bind:onDate='onDate' />
   </div>
 </template>
 
@@ -19,7 +19,8 @@ export default {
   data(){
     return {
       dateCst:Date1.dateConstructor,
-      showInput:{show:false}
+      showInput:{show:false},
+      onDate:{date:''}
     }
   },
   created(){

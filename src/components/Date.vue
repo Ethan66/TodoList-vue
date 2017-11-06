@@ -12,7 +12,7 @@
         <tr><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></tr>
         <tr v-for="i1 in arr">
           <td v-for="i in [0,1,2,3,4,5,6]" v-bind:class="dateCst.dateArr[i1*7+i]['type']"
-              v-bind:data-date="dateCst.dateArr[i1*7+i]['fullDate']" v-on:click='setThisDate.call(this)'>
+              v-bind:data-date="dateCst.dateArr[i1*7+i]['fullDate']" v-on:click='setThisDate'>
             {{dateCst.dateArr[i1*7+i]['date']}}
           </td>
         </tr>
@@ -217,7 +217,7 @@
         })();
         DatePicker.init($(".e-date"));
       }*/
-      props:['dateCst'],
+      props:['dateCst','onDate'],
       data(){
         return {
           arr: this.arrLength(this.dateCst.dateArr)
@@ -247,6 +247,7 @@
         })
           let e=event.target
           e.classList.add('onClick')
+        this.onDate['date']=e.getAttribute('data-date')
       }
     }
   }
