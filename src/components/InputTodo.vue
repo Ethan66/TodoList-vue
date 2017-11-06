@@ -35,9 +35,9 @@
         confirm(){
             if(this.td['time']&&this.td['event']){
               let date=this.onDate['date'];
-              this.td={date:'',time:'',event:''}
               let newTodo={}
-              newTodo={date:date,time:this.td.time,event:this.td.event}
+              newTodo={date:date,time:this.td.time,event:this.td.event,completed:false}
+              this.td={date:'',time:'',event:''}
               this.todos.push(newTodo)
 //              this.todos[date]={time:this.td.time,event:this.td.event}
               this.show.show=false

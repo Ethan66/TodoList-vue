@@ -1,6 +1,5 @@
 <template>
   <div id="date">
-    {{todosObj}}
     <div class="e-img">
       <p class="e-showDate">
           <i class="e-arrow e-left" v-on:click="movePreMonth"><</i>
@@ -317,7 +316,7 @@
           }
           &.onClick.hasTodo{
             &:after{
-              background: #fff; bottom: 2px;
+              background: #fff;
             }
           }
         }

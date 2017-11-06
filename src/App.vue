@@ -1,8 +1,7 @@
 <template>
   <div id="app">
-    {{todos}}
     <Date v-bind:dateCst="dateCst" v-bind:onDate='onDate' v-bind:todos="todos" />
-    <Todos  v-bind:show="showInput"/>
+    <Todos  v-bind:show="showInput" v-bind:todos='todos' v-bind:onDate='onDate'/>
     <InputTodo class="inputTodo" v-show="showInput.show" v-bind:show="showInput" v-bind:onDate='onDate' v-bind:todos="todos"
      v-on:listen='ievent'/>
   </div>

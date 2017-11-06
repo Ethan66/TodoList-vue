@@ -2,7 +2,7 @@
   <div id="todos">
     <h3>我当天的任务清单</h3>
     <ol>
-      <li class="completed">
+      <!--<li class="completed">
         <input type="checkbox"  />
         <i class="time">13.00</i>
         <span>学习交互设计</span>
@@ -41,6 +41,16 @@
             <use xlink:href="#icon-shanchu"></use>
           </svg>
         </p>
+      </li>-->
+      <li v-for="todo in onDateTodo" v-bind:class="{completed:todo['completed']}">
+        <input type="checkbox" v-model="todo['completed']" />
+        <i class="time">{{todo['time']}}</i>
+        <span>{{todo['event']}}</span>
+        <p class="delete">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-shanchu"></use>
+          </svg>
+        </p>
       </li>
     </ol>
     <div class="btn" v-on:click="show.show=true">
@@ -51,7 +61,22 @@
 
 <script>
   export default{
-      props:['show']
+      props:['show','todos','onDate'],
+      computed:{
+        onDateTodo:{
+            get(){
+              let arr=this.todos.filter((value,index)=>{
+                    return value['date']==this.onDate.date
+                })
+              return arr
+            }
+        }
+      },
+      data(){
+          return {
+
+          }
+      }
   }
 </script>
 
