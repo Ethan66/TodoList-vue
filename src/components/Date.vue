@@ -11,7 +11,8 @@
       <table class="e-table">
         <tr><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></tr>
         <tr v-for="i1 in arr">
-          <td v-for="i in [0,1,2,3,4,5,6]" v-bind:class="dateCst.dateArr[i1*7+i]['type']" v-bind:data-date="dateCst.dateArr[i1*7+i]['fullDate']">
+          <td v-for="i in [0,1,2,3,4,5,6]" v-bind:class="dateCst.dateArr[i1*7+i]['type']"
+              v-bind:data-date="dateCst.dateArr[i1*7+i]['fullDate']" v-on:click='setThisDate.call(this)'>
             {{dateCst.dateArr[i1*7+i]['date']}}
           </td>
         </tr>
@@ -239,6 +240,13 @@
         this.dateCst.watchDate=this.dateCst.nextMonthDate;
         this.dateCst.setRelativeDate(this.dateCst.watchDate);
         this.dateCst.setData();
+      },
+      setThisDate(){
+        document.querySelectorAll(".e-table td").forEach(function(value,index){
+            value.classList.remove('onClick')
+        })
+          let e=event.target
+          e.classList.add('onClick')
       }
     }
   }
@@ -275,12 +283,20 @@
           color: #B4B4B4; width: 14.2857142857%; line-height: 50px; font-weight: normal;
         }
         td{
-          text-align: center; line-height: 48px; font-size: 18px; color: #B4B4B4;
+          text-align: center; line-height: 48px; font-size: 18px; color: #B4B4B4; position: relative;
           &.cur-month{
             color: #333;
           }
           &.current{
-            display: block; width: 36px; height: 36px; line-height: 38px; margin: 7px auto 0; color: #fff; background: #31C1FD; border-radius: 50%;
+            display: block; width: 36px; height: 36px; line-height: 38px; margin: 7px auto 0; background: #ddd; border-radius: 50%;
+          }
+          &.onClick{
+            display: block; width: 36px; height: 36px; line-height: 38px; margin: 7px auto 0; background: #31C1FD; border-radius: 50%;
+          }
+          &.hasTodo{
+            &:after{
+              display: block; content: ''; width: 4px; height: 4px; background: #31C1FD; border-radius: 50%; position: absolute;
+            }
           }
         }
 

@@ -66,6 +66,9 @@
         display: block; content: ""; width: 3px; height: 14px; background: $color; margin-right: 16px;
       }
     }
+    ol{
+      overflow: hidden;
+    }
     li{
       padding: 16px 32px; border-bottom: 1px solid #ddd; font-size: 16px; position: relative;
       &.completed{
