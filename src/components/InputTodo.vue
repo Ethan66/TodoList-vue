@@ -4,7 +4,7 @@
     <form>
       <div class="line">
         <label>日期</label>
-        <input type="text" disabled />
+        <input type="text" disabled v-model="onDate['date']"/>
       </div>
       <div class="line">
         <label>时间</label>
@@ -22,7 +22,7 @@
 <script>
 
   export default{
-      props:['show']
+      props:['show','onDate']
   }
 
 </script>
