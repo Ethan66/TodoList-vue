@@ -4,14 +4,14 @@
       <h2>Welcome TodoList!</h2>
       <p>Record every day's things</p>
     </div>
-    <form>
+    <form v-if="show">
       <div class="line">
         <label >
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-user"></use>
           </svg>
         </label>
-        <input type="text" placeholder="username" />
+        <input type="text" placeholder="username" v-model="formData.username" />
       </div>
       <div class="line">
         <label >
@@ -19,30 +19,107 @@
             <use xlink:href="#icon-mima"></use>
           </svg>
         </label>
-        <input type="password" placeholder="password" />
+        <input type="password" placeholder="password" v-model="formData.password" />
       </div>
       <p class='btn'>
-        <button>Sign In</button>
+        <button v-on:click="login">Login</button>
       </p>
       <p class="go">
-        <span>Not Registered?</span><button>GO</button>
+        <span>Not Registered?</span><button v-on:click="show=false">GO</button>
+      </p>
+    </form>
+    <form v-else>
+      <div class="line">
+        <label >
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-user"></use>
+          </svg>
+        </label>
+        <input type="text" placeholder="username" v-model="formData.username" />
+      </div>
+      <div class="line">
+        <label >
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-mima"></use>
+          </svg>
+        </label>
+        <input type="password" placeholder="password" v-model="formData.password" />
+      </div>
+      <p class='btn'>
+        <button v-on:click="signUp">Sign In</button>
+      </p>
+      <p class='btn'>
+        <button v-on:click="show=true">Go back</button>
       </p>
     </form>
   </div>
 </template>
 
 <script>
-  export default{
+  import Vue from 'vue'
+  import AV from 'leancloud-storage'
 
+  var APP_ID = 'q3ldfYbcpfsA4huh3VTThWo2-gzGzoHsz';
+  var APP_KEY = 'fwAIkyQgu5zxnagRTK3nAxCH';
+
+  AV.init({
+    appId: APP_ID,
+    appKey: APP_KEY
+  });
+
+
+  export default{
+      data(){
+          return {
+            show:true,
+            formData:{username:'',password:''},
+            currentUser:{}
+          }
+      },
+    methods:{
+       signUp(){
+         let user = new AV.User();
+         user.setUsername(this.formData.username);
+         user.setPassword(this.formData.password);
+         user.signUp().then( (loginedUser)=> {
+           this.currentUser=this.getCurrentUser()
+         }, (error)=>{
+           alert("注册失败")
+           console.log(error)
+         });
+       },
+      login(){
+        AV.User.logIn(this.formData.username, this.formData.password).then( (loginedUser)=>{
+          this.currentUser=this.getCurrentUser()
+          this.fetchTodos()
+        }, (error)=>{
+          alert('登录失败')
+          console.log(error)
+        });
+      },
+      getCurrentUser(){
+        let current = AV.User.current()
+        if (current) {
+          let {id, attributes: {username}} = current
+          console.log({id, username})
+          return {id, username}
+        } else {
+          return null
+        }
+      },
+    }
   }
 </script>
 
 <style lang='scss'>
   #signOrLogin{
     position: fixed; top: 0; left: 0; z-index: 10; background: #fff; width: 100%; height: 100vh;
-    padding-top: 50%;
+    padding-top: 48%;
     .title{
       margin-bottom: 50px;
+      h2{
+        margin-bottom: 8px;
+      }
       p{
         color: #999;
       }
@@ -62,17 +139,17 @@
     .btn{
       padding: 16px 32px 0;
       button{
-        width: 100%; padding: 16px 0; border: 0; background: #999; border-radius: 6px; color: #fff; text-transform: uppercase;
+        width: 100%; padding: 16px 0; border: 0; background: #999; border-radius: 4px; color: #fff; text-transform: uppercase;
         outline: 0;
       }
     }
     .go{
       display: flex; justify-content: space-between; align-content: center; padding: 16px 32px 0;
       span{
-
+        line-height: 40px; font-size:13px; text-transform: uppercase;
       }
       button{
-        width: 50%; padding: 12px 0; border: 0; background: #999; border-radius: 6px; color: #fff; text-transform: uppercase; outline: 0;
+        width: 50%; padding: 12px 0; border: 0; background: #999; border-radius: 4px; color: #fff; text-transform: uppercase; outline: 0;
       }
     }
   }
