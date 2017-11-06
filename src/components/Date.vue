@@ -14,10 +14,9 @@
         <tr v-for="i1 in arr">
           <td v-for="i in [0,1,2,3,4,5,6]"
               v-bind:data-date="dateCst.dateArr[i1*7+i]['fullDate']"
-              v-bind:class="[dateCst.dateArr[i1*7+i]['type'],{'hasTodo':Boolean(todos[dateCst.dateArr[i1*7+i]['fullDate']])}]" v-on:click='setThisDate'
+              v-bind:class="[dateCst.dateArr[i1*7+i]['type'],{'hasTodo':Boolean(todosObj[dateCst.dateArr[i1*7+i]['fullDate']])}]" v-on:click='setThisDate'
               >
-            <!--v-bind:class="{hasTodo:todos[dateCst.dateArr[i1*7+i]['fullDate']]}"-->
-            {{dateCst.dateArr[i1*7+i]['date']}}{{todos[dateCst.dateArr[i1*7+i]['fullDate']]}}
+            <span>{{dateCst.dateArr[i1*7+i]['date']}}</span>
           </td>
         </tr>
       </table>
@@ -261,8 +260,8 @@
             value.classList.remove('onClick')
         })
           let e=event.target
-          e.classList.add('onClick')
-        this.onDate['date']=e.getAttribute('data-date')
+          e.parentNode.classList.add('onClick')
+        this.onDate['date']=e.parentNode.getAttribute('data-date')
       }
     }
   }
@@ -303,15 +302,22 @@
           &.cur-month{
             color: #333;
           }
-          &.current{
-            display: block; width: 36px; height: 36px; line-height: 38px; margin: 7px auto 0; background: #ddd; border-radius: 50%;
+          &.current span{
+            display: block; width: 36px; height: 36px; line-height: 38px; margin: 0 auto; background: #ddd; border-radius: 50%;
           }
-          &.onClick{
-            display: block; width: 36px; height: 36px; line-height: 38px; margin: 7px auto 0; background: #31C1FD; border-radius: 50%;
+          &.onClick span{
+            display: block; width: 36px; height: 36px; line-height: 38px; margin: 0 auto; background: #31C1FD; border-radius: 50%;
+            color: #fff;
           }
           &.hasTodo{
             &:after{
-              display: block; content: ''; width: 4px; height: 4px; background: #31C1FD; border-radius: 50%; position: absolute;
+              display: block; content: ''; width: 5px; height: 5px; background: #31C1FD; border-radius: 50%; position: absolute;
+              left: 50%; margin-left: -2px; bottom: 8px;
+            }
+          }
+          &.onClick.hasTodo{
+            &:after{
+              background: #fff; bottom: 2px;
             }
           }
         }
