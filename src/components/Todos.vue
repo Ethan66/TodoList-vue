@@ -46,7 +46,10 @@
       },
       methods:{
           deletingTodo(index){
-              this.delete1=index
+              if(this.delete1!==index){
+                this.delete1=index
+              }
+              else this.delete1='999999'
           },
       }
   }

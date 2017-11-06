@@ -13,7 +13,8 @@
         <tr v-for="i1 in arr">
           <td v-for="i in [0,1,2,3,4,5,6]"
               v-bind:data-date="dateCst.dateArr[i1*7+i]['fullDate']"
-              v-bind:class="[dateCst.dateArr[i1*7+i]['type'],{'hasTodo':Boolean(todosObj[dateCst.dateArr[i1*7+i]['fullDate']])}]" v-on:click='setThisDate'
+              v-bind:class="[dateCst.dateArr[i1*7+i]['type'],{'hasTodo':Boolean(todosObj[dateCst.dateArr[i1*7+i]['fullDate']])}
+              ,{onClick:dateCst.dateArr[i1*7+i]['fullDate']==onDate['date']}]" v-on:click='setThisDate'
               >
             <span>{{dateCst.dateArr[i1*7+i]['date']}}</span>
           </td>
