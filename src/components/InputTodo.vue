@@ -25,7 +25,7 @@
     props:['show','onDate','todos'],
     data(){
         return {
-            todo:{date:this.onDate['date'],time:'',event:''}
+            todo:{date:'',time:'',event:''}
         }
     },
     methods:{
@@ -34,8 +34,11 @@
         },
         confirm(){
             if(this.todo['time']&&this.todo['event']){
-              this.todos.push(this.todo)
-              this.todo={date:this.onDate['date'],time:'',event:''}
+              let date=this.onDate['date'];
+              let newTodo={}
+              newTodo[date]={time:this.todo.time,event:this.todo.event}
+              this.todos.push(newTodo)
+              this.todo={date:'',time:'',event:''}
               this.show.show=false
             }
         }
