@@ -44,7 +44,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background: #eee;
+  background: #f1f1f1;
 
 .icon {
   width: 1em; height: 1em;

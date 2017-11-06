@@ -60,7 +60,7 @@
   #todos{
     margin-top: 12px; background: #fff; text-align: left;
     h3{
-      font-size: 14px; padding: 8px 32px; border-bottom: 1px solid #ddd; display: flex; align-items: center; font-weight: normal;
+      font-size: 14px; padding: 8px 32px; border-bottom: 1px solid #eee; display: flex; align-items: center; font-weight: normal;
       color: #000;
       &:before{
         display: block; content: ""; width: 3px; height: 14px; background: $color; margin-right: 16px;
@@ -70,7 +70,7 @@
       overflow: hidden;
     }
     li{
-      padding: 16px 32px; border-bottom: 1px solid #ddd; font-size: 16px; position: relative;
+      padding: 16px 32px; border-bottom: 1px solid #eee; font-size: 16px; position: relative;
       &.completed{
         color: #aaa;
       }
