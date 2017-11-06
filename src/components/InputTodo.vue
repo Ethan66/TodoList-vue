@@ -8,13 +8,13 @@
       </div>
       <div class="line">
         <label>时间</label>
-        <input type="text" />
+        <input type="text" v-model="todo['time']" />
       </div>
       <div class="line">
         <label>事件</label>
-        <input type="text" />
+        <input type="text" v-model="todo['event']" />
       </div>
-      <button v-on:click="show.show=false">确定</button>
+      <button v-on:click="confirm">确定</button>
     </form>
   </div>
 </template>
@@ -22,7 +22,21 @@
 <script>
 
   export default{
-      props:['show','onDate']
+    props:['show','onDate','todos'],
+    data(){
+        return {
+            todo:{date:this.onDate['date'],time:'',event:''}
+        }
+    },
+    methods:{
+        confirm(){
+            if(this.todo['time']&&this.todo['event']){
+              this.todos.push(this.todo)
+              this.todo={date:this.onDate['date'],time:'',event:''}
+              this.show.show=false
+            }
+        }
+    }
   }
 
 </script>
@@ -57,7 +71,7 @@
       }
       button{
         width: 100%; padding: 12px 0; background: $color; border: none; margin-top: 20px; color: #fff;
-        border-radius: 4px; letter-spacing: 4px; font-size: 16px;
+        border-radius: 4px; letter-spacing: 4px; font-size: 16px; outline: 0;
       }
     }
   }
