@@ -4,6 +4,7 @@
     <Todos  v-bind:show="showInput" v-bind:todos='todos' v-bind:onDate='onDate'/>
     <InputTodo class="inputTodo" v-show="showInput.show" v-bind:show="showInput" v-bind:onDate='onDate' v-bind:todos="todos"
      v-on:listen='ievent'/>
+    <SignOrLogin />
   </div>
 </template>
 
@@ -12,10 +13,11 @@
   import Todos from './components/Todos'
   import Date1 from './components/Date-module'
   import InputTodo from './components/InputTodo'
+  import SignOrLogin from './components/SignOrLogin'
 export default {
   name: 'app',
   components:{
-      Date,Todos,InputTodo
+      Date,Todos,InputTodo,SignOrLogin
   },
   data(){
     return {
