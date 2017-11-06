@@ -36,7 +36,7 @@
             if(this.td['time']&&this.td['event']){
               let date=this.onDate['date'];
               let newTodo={}
-              newTodo={date:date,time:this.td.time,event:this.td.event,completed:false}
+              newTodo={date:date,time:this.td.time,event:this.td.event,completed:false,deleted:false}
               this.td={date:'',time:'',event:''}
               this.todos.push(newTodo)
 //              this.todos[date]={time:this.td.time,event:this.td.event}

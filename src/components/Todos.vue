@@ -2,51 +2,11 @@
   <div id="todos">
     <h3>我当天的任务清单</h3>
     <ol>
-      <!--<li class="completed">
-        <input type="checkbox"  />
-        <i class="time">13.00</i>
-        <span>学习交互设计</span>
-        <p class="delete">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shanchu"></use>
-          </svg>
-        </p>
-      </li>
-      <li class="deleting">
-        <input type="checkbox"  />
-        <i class="time">13.00</i>
-        <span>学习交互设计</span>
-        <p class="delete">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shanchu"></use>
-          </svg>
-        </p>
-      </li>
-      <li>
-        <input type="checkbox"  />
-        <i class="time">13.00</i>
-        <span>学习交互设计</span>
-        <p class="delete">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shanchu"></use>
-          </svg>
-        </p>
-      </li>
-      <li>
-        <input type="checkbox"  />
-        <i class="time">13.00</i>
-        <span>学习交互设计</span>
-        <p class="delete">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shanchu"></use>
-          </svg>
-        </p>
-      </li>-->
-      <li v-for="todo in onDateTodo" v-bind:class="{completed:todo['completed']}">
+      <li v-for="(todo,index) in onDateTodo" v-bind:class="{completed:todo['completed'],deleting:delete1==index}" v-on:click="deletingTodo(index)">
         <input type="checkbox" v-model="todo['completed']" />
         <i class="time">{{todo['time']}}</i>
         <span>{{todo['event']}}</span>
-        <p class="delete">
+        <p class="delete" v-on:click="onDateTodo=todo">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-shanchu"></use>
           </svg>
@@ -66,16 +26,28 @@
         onDateTodo:{
             get(){
               let arr=this.todos.filter((value,index)=>{
-                    return value['date']==this.onDate.date
+                    return (value['date']==this.onDate.date&&value['deleted']==false)
                 })
               return arr
+            },
+          set(todo){
+            for(let i=0;i<this.todos.length;i++){
+              if(this.todos[i]==todo){
+                this.todos[i]['deleted']=true
+              }
             }
+          }
         }
       },
       data(){
           return {
-
+              delete1:'999999'
           }
+      },
+      methods:{
+          deletingTodo(index){
+              this.delete1=index
+          },
       }
   }
 </script>
