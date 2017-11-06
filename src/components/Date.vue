@@ -1,5 +1,6 @@
 <template>
   <div id="date">
+    {{todosObj}}
     <div class="e-img">
       <p class="e-showDate">
           <i class="e-arrow e-left" v-on:click="movePreMonth"><</i>
@@ -11,9 +12,12 @@
       <table class="e-table">
         <tr><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></tr>
         <tr v-for="i1 in arr">
-          <td v-for="i in [0,1,2,3,4,5,6]" v-bind:class="dateCst.dateArr[i1*7+i]['type']"
-              v-bind:data-date="dateCst.dateArr[i1*7+i]['fullDate']" v-on:click='setThisDate'>
-            {{dateCst.dateArr[i1*7+i]['date']}}
+          <td v-for="i in [0,1,2,3,4,5,6]"
+              v-bind:data-date="dateCst.dateArr[i1*7+i]['fullDate']"
+              v-bind:class="[dateCst.dateArr[i1*7+i]['type'],{'hasTodo':Boolean(todos[dateCst.dateArr[i1*7+i]['fullDate']])}]" v-on:click='setThisDate'
+              >
+            <!--v-bind:class="{hasTodo:todos[dateCst.dateArr[i1*7+i]['fullDate']]}"-->
+            {{dateCst.dateArr[i1*7+i]['date']}}{{todos[dateCst.dateArr[i1*7+i]['fullDate']]}}
           </td>
         </tr>
       </table>
@@ -69,7 +73,7 @@
 </template>
 
 <script>
-  import $ from "jquery"
+//  import $ from "jquery"
 
   export default{
       /*mounted(){
@@ -217,12 +221,23 @@
         })();
         DatePicker.init($(".e-date"));
       }*/
-      props:['dateCst','onDate'],
+      props:['dateCst','onDate','todos'],
       data(){
         return {
           arr: this.arrLength(this.dateCst.dateArr)
         }
       },
+    computed:{
+      todosObj:{
+          get(){
+              const todosObj={}
+              this.todos.forEach((value,index)=>{
+                  todosObj[value["date"]]=1
+              })
+            return todosObj
+          }
+      }
+    },
     methods:{
       arrLength(date){
           let arr=[]

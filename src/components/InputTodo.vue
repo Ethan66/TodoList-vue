@@ -8,11 +8,11 @@
       </div>
       <div class="line">
         <label>时间</label>
-        <input type="text" v-model="todo['time']" />
+        <input type="text" v-model="td['time']" />
       </div>
       <div class="line">
         <label>事件</label>
-        <input type="text" v-model="todo['event']" />
+        <input type="text" v-model="td['event']" />
       </div>
       <button v-on:click="confirm">确定</button>
     </form>
@@ -25,7 +25,7 @@
     props:['show','onDate','todos'],
     data(){
         return {
-            todo:{date:'',time:'',event:''}
+            td:{date:'',time:'',event:''}
         }
     },
     methods:{
@@ -33,12 +33,13 @@
           this.show.show=false
         },
         confirm(){
-            if(this.todo['time']&&this.todo['event']){
+            if(this.td['time']&&this.td['event']){
               let date=this.onDate['date'];
+              this.td={date:'',time:'',event:''}
               let newTodo={}
-              newTodo[date]={time:this.todo.time,event:this.todo.event}
+              newTodo={date:date,time:this.td.time,event:this.td.event}
               this.todos.push(newTodo)
-              this.todo={date:'',time:'',event:''}
+//              this.todos[date]={time:this.td.time,event:this.td.event}
               this.show.show=false
             }
         }

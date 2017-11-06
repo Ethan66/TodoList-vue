@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <Date v-bind:dateCst="dateCst" v-bind:onDate='onDate' />
+    {{todos}}
+    <Date v-bind:dateCst="dateCst" v-bind:onDate='onDate' v-bind:todos="todos" />
     <Todos  v-bind:show="showInput"/>
-    <InputTodo class="inputTodo" v-show="showInput.show" v-bind:show="showInput" v-bind:onDate='onDate' v-bind:todos="todos" />
+    <InputTodo class="inputTodo" v-show="showInput.show" v-bind:show="showInput" v-bind:onDate='onDate' v-bind:todos="todos"
+     v-on:listen='ievent'/>
   </div>
 </template>
 
@@ -26,6 +28,11 @@ export default {
   },
   created(){
 
+  },
+  methods:{
+      ievent(date,obj){
+         this.todos[date]=obj
+      }
   }
 
 }
