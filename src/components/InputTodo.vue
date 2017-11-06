@@ -1,6 +1,6 @@
 <template>
   <div id="inputTodo">
-    <header><span v-on:click="show.show=false"><</span>输入待办事件</header>
+    <header><span v-on:click="goback"><</span>输入待办事件</header>
     <form>
       <div class="line">
         <label>日期</label>
@@ -29,6 +29,9 @@
         }
     },
     methods:{
+        goback(){
+          this.show.show=false
+        },
         confirm(){
             if(this.todo['time']&&this.todo['event']){
               this.todos.push(this.todo)
