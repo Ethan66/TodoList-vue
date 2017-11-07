@@ -4,7 +4,7 @@
     <Todos  v-bind:show="showInput" v-bind:todos='todos' v-bind:onDate='onDate'/>
     <InputTodo class="inputTodo" v-show="showInput.show" v-bind:show="showInput" v-bind:onDate='onDate' v-bind:todos="todos"
      v-on:listen='ievent' />
-    <SignOrLogin v-bind:currentUser="currentUser" v-on:listen="listen" />
+    <SignOrLogin v-bind:currentUser="currentUser" v-on:listenUser="listenUser"  v-on:listenTodos="listenTodos" v-bind:todos="todos" />
     <div class="navIcon" v-on:click="logout1.show1=true">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-1-copy"></use>
@@ -43,8 +43,12 @@ export default {
     ievent(date,obj){
       this.todos[date]=obj
     },
-    listen(a){
+    listenUser(a,b,c){
       this.currentUser=a
+    },
+    listenTodos(a,b){
+      this.todos=a
+      this.todos.id=b
     }
   }
 

@@ -70,9 +70,10 @@
 
   export default{
       created(){
-        this.$emit("listen",this.getCurrentUser())
+        this.$emit("listenUser",this.getCurrentUser())
+        this.fetchTodos()
       },
-      props:['currentUser'],
+      props:['currentUser','todos'],
       data(){
           return {
             show:true,
@@ -80,6 +81,22 @@
           }
       },
     methods:{
+      fetchTodos(){
+        if(this.currentUser){
+
+          var query = new AV.Query('AllTodos');
+          query.find()
+            .then((todos)=>{
+              let avAllTodos = todos[0]
+              let id = avAllTodos.id
+              let tds = JSON.parse(avAllTodos.attributes.content)
+              this.$emit("listenTodos",tds,id)
+
+            }, function(error){
+              console.error(error)
+            })
+        }
+      },
        signUp(){
          let user = new AV.User();
          user.setUsername(this.formData.username);
