@@ -4,7 +4,13 @@
     <Todos  v-bind:show="showInput" v-bind:todos='todos' v-bind:onDate='onDate'/>
     <InputTodo class="inputTodo" v-show="showInput.show" v-bind:show="showInput" v-bind:onDate='onDate' v-bind:todos="todos"
      v-on:listen='ievent'/>
-    <SignOrLogin v-bind:currentUser="currentUser" />
+    <SignOrLogin v-bind:currentUser="currentUser" v-on:listen="listen" />
+    <div class="navIcon" v-on:click="logout1.show1=true">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-1-copy"></use>
+      </svg>
+    </div>
+    <NavLeft v-bind:currentUser="currentUser" v-if="logout1.show1" v-bind:logout1="logout1" />
   </div>
 </template>
 
@@ -14,10 +20,11 @@
   import Date1 from './components/Date-module'
   import InputTodo from './components/InputTodo'
   import SignOrLogin from './components/SignOrLogin'
+  import NavLeft from './components/NavLeft'
 export default {
   name: 'app',
   components:{
-      Date,Todos,InputTodo,SignOrLogin
+      Date,Todos,InputTodo,SignOrLogin,NavLeft
   },
   data(){
     return {
@@ -25,22 +32,27 @@ export default {
       showInput:{show:false},
       onDate:{date:''},
       todos:[],
-      currentUser:{}
+      currentUser:{id:'',username:''},
+      logout1:{show1:false}
     }
   },
   created(){
 
   },
   methods:{
-      ievent(date,obj){
-         this.todos[date]=obj
-      }
+    ievent(date,obj){
+      this.todos[date]=obj
+    },
+    listen(a){
+      this.currentUser=a
+    }
   }
 
 }
 </script>
 
-<style>
+<style lang='scss'>
+  $color:#31C1FD;
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -58,5 +70,11 @@ export default {
 .inputTodo{
 
 }
+  .navIcon{
+    position: fixed; top: 16px; left: 16px;
+    .icon{
+      width: 22px; height: 22px; fill:$color;
+    }
+  }
 }
 </style>
