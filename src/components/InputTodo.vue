@@ -20,7 +20,7 @@
 </template>
 
 <script>
-
+  import AV from 'leancloud-storage'
   export default{
     props:['show','onDate','todos'],
     data(){
@@ -39,10 +39,42 @@
               newTodo={date:date,time:this.td.time,event:this.td.event,completed:false,deleted:false}
               this.td={date:'',time:'',event:''}
               this.todos.push(newTodo)
+              this.saveOrUpdateTodos()
 //              this.todos[date]={time:this.td.time,event:this.td.event}
               this.show.show=false
             }
+        },
+      saveOrUpdateTodos(){
+        if(this.todos.id){
+          this.updateTodos()
+        }else{
+          this.saveTodos()
         }
+      },
+      saveTodos(){
+        let dataString = JSON.stringify(this.todos)
+        var AVTodos = AV.Object.extend('AllTodos');
+        var avTodos = new AVTodos();
+        var acl = new AV.ACL()
+        acl.setReadAccess(AV.User.current(),true)
+        acl.setWriteAccess(AV.User.current(),true)
+        avTodos.set('content', dataString);
+        avTodos.setACL(acl)
+        avTodos.save().then((todo)=>{
+          this.todos.id = todo.id
+          console.log('保存成功');
+        }, function (error) {
+          alert('保存失败');
+        });
+      },
+      updateTodos(){
+        let dataString = JSON.stringify(this.todos)
+        let avTodos = AV.Object.createWithoutData('AllTodos', this.todos.id)
+        avTodos.set('content', dataString)
+        avTodos.save().then(()=>{
+          console.log('更新成功')
+        })
+      }
     }
   }
 

@@ -37,7 +37,7 @@
 <style lang='scss'>
   $color:#31C1FD;
   #navLeft{
-    width: 100%; min-height: 100vh; position: fixed; top: 0; left: 0; z-index: 10; background: rgba(0,0,0,.3); padding-right: 30%;
+    width: 100%; min-height: 100vh; position: fixed; top: 0; left: 0; z-index: 10; background: rgba(0,0,0,.5); padding-right: 30%;
     .content{
       width: 100%; background: #fff; min-height: 100vh;
       h3{

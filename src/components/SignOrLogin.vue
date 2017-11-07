@@ -85,8 +85,8 @@
          user.setUsername(this.formData.username);
          user.setPassword(this.formData.password);
          user.signUp().then( (loginedUser)=> {
-           this.currentUser=this.getCurrentUser()
            window.location.reload()
+           this.currentUser=this.getCurrentUser()
          }, (error)=>{
            alert("注册失败")
            console.log(error)
@@ -94,8 +94,8 @@
        },
       login(){
         AV.User.logIn(this.formData.username, this.formData.password).then( (loginedUser)=>{
-          this.currentUser=this.getCurrentUser()
           window.location.reload()
+          this.currentUser=this.getCurrentUser()
           this.fetchTodos()
         }, (error)=>{
           alert('登录失败')
