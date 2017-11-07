@@ -30,20 +30,17 @@ export default {
     return {
       dateCst:Date1.dateConstructor,
       showInput:{show:false},
-      onDate:{date:''},
+      onDate:{date:""},
       todos:[],
       currentUser:{id:'',username:''},
       logout1:{show1:false}
     }
   },
-  created(){
-
-  },
   methods:{
     ievent(date,obj){
       this.todos[date]=obj
     },
-    listenUser(a,b,c){
+    listenUser(a){
       this.currentUser=a
     },
     listenTodos(a,b){
