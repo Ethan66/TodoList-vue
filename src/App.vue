@@ -3,7 +3,7 @@
     <Date v-bind:dateCst="dateCst" v-bind:onDate='onDate' v-bind:todos="todos" />
     <Todos  v-bind:show="showInput" v-bind:todos='todos' v-bind:onDate='onDate'/>
     <InputTodo class="inputTodo" v-show="showInput.show" v-bind:show="showInput" v-bind:onDate='onDate' v-bind:todos="todos"
-     v-on:listen='ievent'/>
+     v-on:listen='ievent' />
     <SignOrLogin v-bind:currentUser="currentUser" v-on:listen="listen" />
     <div class="navIcon" v-on:click="logout1.show1=true">
       <svg class="icon" aria-hidden="true">
@@ -68,7 +68,7 @@ export default {
   overflow: hidden;
 }
 .inputTodo{
-
+  position: fixed; z-index: 12;
 }
   .navIcon{
     position: fixed; top: 16px; left: 16px;
