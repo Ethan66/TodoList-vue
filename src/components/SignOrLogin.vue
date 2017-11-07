@@ -1,5 +1,5 @@
 <template>
-  <div id="signOrLogin">
+  <div id="signOrLogin" v-show="!currentUser">
     <div class="title">
       <h2>Welcome TodoList!</h2>
       <p>Record every day's things</p>
@@ -69,11 +69,14 @@
 
 
   export default{
+      created(){
+        this.currentUser=this.getCurrentUser()
+      },
+      props:['currentUser'],
       data(){
           return {
             show:true,
             formData:{username:'',password:''},
-            currentUser:{}
           }
       },
     methods:{

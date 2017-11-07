@@ -4,7 +4,7 @@
     <Todos  v-bind:show="showInput" v-bind:todos='todos' v-bind:onDate='onDate'/>
     <InputTodo class="inputTodo" v-show="showInput.show" v-bind:show="showInput" v-bind:onDate='onDate' v-bind:todos="todos"
      v-on:listen='ievent'/>
-    <SignOrLogin />
+    <SignOrLogin v-bind:currentUser="currentUser" />
   </div>
 </template>
 
@@ -24,7 +24,8 @@ export default {
       dateCst:Date1.dateConstructor,
       showInput:{show:false},
       onDate:{date:''},
-      todos:[]
+      todos:[],
+      currentUser:{}
     }
   },
   created(){
