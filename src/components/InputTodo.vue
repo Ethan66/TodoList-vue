@@ -1,5 +1,5 @@
 <template>
-  <div id="inputTodo">
+  <div id="inputTodo" v-if="onDate['date']">
     <header><span v-on:click="goback"><</span>输入待办事件</header>
     <form>
       <div class="line">
