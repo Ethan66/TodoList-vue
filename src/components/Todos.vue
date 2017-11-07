@@ -13,7 +13,7 @@
         </p>
       </li>
     </ol>
-    <div class="btn" v-on:click="show.show=true">
+    <div class="btn" v-on:click="showInputPage">
       <p >+</p>
     </div>
   </div>
@@ -45,12 +45,17 @@
           }
       },
       methods:{
-          deletingTodo(index){
-              if(this.delete1!==index){
-                this.delete1=index
-              }
-              else this.delete1='999999'
-          },
+        deletingTodo(index){
+            if(this.delete1!==index){
+              this.delete1=index
+            }
+            else this.delete1='999999'
+        },
+        showInputPage(){
+          if(this.onDate.date){
+            this.show.show=true
+          }
+        }
       }
   }
 </script>
