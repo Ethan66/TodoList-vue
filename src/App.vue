@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Date v-bind:dateCst="dateCst" v-bind:onDate='onDate' v-bind:todos="todos" />
-    <Todos  v-bind:show="showInput" v-bind:todos='todos' v-bind:onDate='onDate' v-on:listen="go1" />
+    <Todos  v-bind:show="showInput" v-bind:todos='todos' v-bind:onDate='onDate' v-on:listen="go1" v-on:listen1="delete2" />
     <InputTodo class="inputTodo" v-show="showInput.show" v-bind:show="showInput" v-bind:onDate='onDate' v-bind:todos="todos"
      v-on:listen='ievent' />
     <SignOrLogin v-bind:currentUser="currentUser" v-on:listenUser="listenUser"  v-on:listenTodos="listenTodos" v-bind:todos="todos" />
@@ -82,7 +82,10 @@ export default {
     },
     go1(index){
       this.todos[index]['completed']=this.todos[index]['completed']?false:true
-      console.log(this.todos)
+      this.saveOrUpdateTodos()
+    },
+    delete2(index){
+      this.todos.splice(index,1)
       this.saveOrUpdateTodos()
     }
   }

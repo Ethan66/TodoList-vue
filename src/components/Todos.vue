@@ -4,10 +4,10 @@
     <ol>
       <li v-for="(todo,index) in todos" v-if="todo['date']==onDate.date&&todo['deleted']==false"
           v-bind:class="{completed:todo['completed'],deleting:delete1==index}" v-on:click="deletingTodo(index)">
-        <input type="checkbox" value="true" v-model="todo['completed']" v-on:click.stop="go(index)" />
+        <input type="checkbox" value="true" v-model="todo['completed']" v-on:click.stop="completeTodo(index)" />
         <i class="time">{{todo['time']}}</i>
         <span>{{todo['event']}}</span>
-        <p class="delete" v-on:click="onDateTodo=todo">
+        <p class="delete" v-on:click="detTodo(index)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-shanchu"></use>
           </svg>
@@ -59,8 +59,11 @@
           }
         },
 
-        go(index){
+        completeTodo(index){
           this.$emit("listen",index)
+        },
+        detTodo(index){
+          this.$emit("listen1",index)
         }
       }
   }
