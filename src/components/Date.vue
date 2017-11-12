@@ -271,20 +271,18 @@
   #date{
     background: #fff; overflow: hidden;
     >.e-img{
-      padding: 85px 0 55px; background: url(../assets/mountain.jpeg) no-repeat; background-position: -300px -180px;
+      padding: 85px 0 55px; background: url(../assets/mountain.jpeg) no-repeat; background-size: cover;
       margin-top: -20px;
     }
     .e-showDate{
       text-align: center; color: #fff; font-size: 28px; position: relative;
       span{
-        text-shadow: 0 3px 3px rgba(0,0,0,.6);
+        text-shadow: 0 3px 3px rgba(0,0,0,.4);
       }
       .e-arrow{
-        display: block; width: 26px; height: 26px; line-height: 26px; border-radius: 50%; font-size: 18px; background: rgba(0,0,0,.2); color: #fff;
+        display: block; width: 26px; height: 26px; line-height: 26px; border-radius: 50%; font-size: 18px; background: rgba(255, 255, 255, 0.2);
+        color: rgba(255,255,255,.8);
         position: absolute; top: 2px; left: 60px; cursor: pointer; transition: all .4s;
-        &:hover{
-          background: rgba(0,0,0,.4);
-        }
         &.e-right{
           left: auto; right: 60px; top: 1px;
         }

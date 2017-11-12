@@ -74,7 +74,7 @@ export default {
   .navIcon{
     position: fixed; top: 16px; left: 16px;
     .icon{
-      width: 22px; height: 22px; fill:$color;
+      width: 22px; height: 22px; fill:#fff;
     }
   }
 }

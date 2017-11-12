@@ -1,57 +1,59 @@
 <template>
   <div id="signOrLogin" v-show="!currentUser">
-    <div class="title">
-      <h2>Welcome TodoList!</h2>
-      <p>Record every day's things</p>
+    <div class="wrap">
+      <div class="title">
+        <h2>Welcome TodoList!</h2>
+        <p>Record every day's things</p>
+      </div>
+      <form v-if="show">
+        <div class="line">
+          <label >
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-user"></use>
+            </svg>
+          </label>
+          <input type="text" placeholder="username" v-model="formData.username" />
+        </div>
+        <div class="line">
+          <label >
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-mima"></use>
+            </svg>
+          </label>
+          <input type="password" placeholder="password" v-model="formData.password" />
+        </div>
+        <p class='btn'>
+          <button v-on:click="login">Login</button>
+        </p>
+        <p class="go">
+          <span>Not Registered?</span><button v-on:click="show=false">GO</button>
+        </p>
+      </form>
+      <form v-else>
+        <div class="line">
+          <label >
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-user"></use>
+            </svg>
+          </label>
+          <input type="text" placeholder="username" v-model="formData.username" />
+        </div>
+        <div class="line">
+          <label >
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-mima"></use>
+            </svg>
+          </label>
+          <input type="password" placeholder="password" v-model="formData.password" />
+        </div>
+        <p class='btn'>
+          <button v-on:click="signUp">Sign In</button>
+        </p>
+        <p class='btn'>
+          <button v-on:click="show=true">Go back</button>
+        </p>
+      </form>
     </div>
-    <form v-if="show">
-      <div class="line">
-        <label >
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-user"></use>
-          </svg>
-        </label>
-        <input type="text" placeholder="username" v-model="formData.username" />
-      </div>
-      <div class="line">
-        <label >
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-mima"></use>
-          </svg>
-        </label>
-        <input type="password" placeholder="password" v-model="formData.password" />
-      </div>
-      <p class='btn'>
-        <button v-on:click="login">Login</button>
-      </p>
-      <p class="go">
-        <span>Not Registered?</span><button v-on:click="show=false">GO</button>
-      </p>
-    </form>
-    <form v-else>
-      <div class="line">
-        <label >
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-user"></use>
-          </svg>
-        </label>
-        <input type="text" placeholder="username" v-model="formData.username" />
-      </div>
-      <div class="line">
-        <label >
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-mima"></use>
-          </svg>
-        </label>
-        <input type="password" placeholder="password" v-model="formData.password" />
-      </div>
-      <p class='btn'>
-        <button v-on:click="signUp">Sign In</button>
-      </p>
-      <p class='btn'>
-        <button v-on:click="show=true">Go back</button>
-      </p>
-    </form>
   </div>
 </template>
 
@@ -136,7 +138,9 @@
 <style lang='scss'>
   #signOrLogin{
     position: fixed; top: 0; left: 0; z-index: 10; background: #fff; width: 100%; height: 100vh;
-    padding-top: 48%;
+    .wrap{
+      position: fixed; top: 50%; left: 0; width: 100%; margin-top: -216px;
+    }
     .title{
       margin-bottom: 50px;
       h2{
