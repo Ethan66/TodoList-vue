@@ -2,8 +2,9 @@
   <div id="todos">
     <h3>我当天的任务清单</h3>
     <ol>
-      <li v-for="(todo,index) in onDateTodo" v-bind:class="{completed:todo['completed'],deleting:delete1==index}" v-on:click="deletingTodo(index)">
-        <input type="checkbox" v-model="todo['completed']" />
+      <li v-for="(todo,index) in todos" v-if="todo['date']==onDate.date&&todo['deleted']==false"
+          v-bind:class="{completed:todo['completed'],deleting:delete1==index}" v-on:click="deletingTodo(index)">
+        <input type="checkbox" value="true" v-model="todo['completed']" v-on:click.stop="go(index)" />
         <i class="time">{{todo['time']}}</i>
         <span>{{todo['event']}}</span>
         <p class="delete" v-on:click="onDateTodo=todo">
@@ -20,6 +21,7 @@
 </template>
 
 <script>
+
   export default{
       props:['show','todos','onDate'],
       computed:{
@@ -55,6 +57,10 @@
           if(this.onDate.date){
             this.show.show=true
           }
+        },
+
+        go(index){
+          this.$emit("listen",index)
         }
       }
   }

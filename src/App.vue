@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Date v-bind:dateCst="dateCst" v-bind:onDate='onDate' v-bind:todos="todos" />
-    <Todos  v-bind:show="showInput" v-bind:todos='todos' v-bind:onDate='onDate'/>
+    <Todos  v-bind:show="showInput" v-bind:todos='todos' v-bind:onDate='onDate' v-on:listen="go1" />
     <InputTodo class="inputTodo" v-show="showInput.show" v-bind:show="showInput" v-bind:onDate='onDate' v-bind:todos="todos"
      v-on:listen='ievent' />
     <SignOrLogin v-bind:currentUser="currentUser" v-on:listenUser="listenUser"  v-on:listenTodos="listenTodos" v-bind:todos="todos" />
@@ -21,6 +21,8 @@
   import InputTodo from './components/InputTodo'
   import SignOrLogin from './components/SignOrLogin'
   import NavLeft from './components/NavLeft'
+  import AV from 'leancloud-storage'
+
 export default {
   name: 'app',
   components:{
@@ -46,6 +48,42 @@ export default {
     listenTodos(a,b){
       this.todos=a
       this.todos.id=b
+    },
+    saveOrUpdateTodos(){
+      if(this.todos.id){
+        this.updateTodos()
+      }else{
+        this.saveTodos()
+      }
+    },
+    saveTodos(){
+      let dataString = JSON.stringify(this.todos)
+      var AVTodos = AV.Object.extend('AllTodos');
+      var avTodos = new AVTodos();
+      var acl = new AV.ACL()
+      acl.setReadAccess(AV.User.current(),true)
+      acl.setWriteAccess(AV.User.current(),true)
+      avTodos.set('content', dataString);
+      avTodos.setACL(acl)
+      avTodos.save().then((todo)=>{
+        this.todos.id = todo.id
+        console.log('保存成功');
+      }, function (error) {
+        alert('保存失败');
+      });
+    },
+    updateTodos(){
+      let dataString = JSON.stringify(this.todos)
+      let avTodos = AV.Object.createWithoutData('AllTodos', this.todos.id)
+      avTodos.set('content', dataString)
+      avTodos.save().then(()=>{
+        console.log('更新成功')
+      })
+    },
+    go1(index){
+      this.todos[index]['completed']=this.todos[index]['completed']?false:true
+      console.log(this.todos)
+      this.saveOrUpdateTodos()
     }
   }
 
