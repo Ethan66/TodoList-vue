@@ -137,18 +137,22 @@
 
 <style lang='scss'>
   #signOrLogin{
-    position: fixed; top: 0; left: 0; z-index: 10; background: #fff; width: 100%; height: 100vh;
+    position: fixed; top: 0; left: 0; z-index: 10; width: 100%; height: 100vh; background: url(../assets/Wallpaper.jpg) no-repeat #fff;
+    background-size: cover;
     .wrap{
-      position: fixed; top: 50%; left: 0; width: 100%; margin-top: -216px;
+      position: fixed; top: 50%; left: 0; width: 100%; margin-top: -216px; height: 100%; padding-top: 66px;
     }
     .title{
       margin-bottom: 50px;
       h2{
-        margin-bottom: 8px;
+        margin-bottom: 8px; font-size: 28px; color:#fff; text-shadow: 0 2px 6px rgba(0,0,0,.3);
       }
       p{
-        color: #999;
+        font-size: 18px; color: #fff; text-shadow: 0 2px 6px rgba(0,0,0,.1);
       }
+    }
+    form{
+      width: 100%; position: absolute; bottom: 220px;
     }
     .line{
       padding: 0 32px 0 56px; margin-bottom: 16px; position: relative;
@@ -165,7 +169,7 @@
     .btn{
       padding: 16px 32px 0;
       button{
-        width: 100%; padding: 16px 0; border: 0; background: #999; border-radius: 4px; color: #fff; text-transform: uppercase;
+        width: 100%; padding: 14px 0; border: 0; background: #6a88b7; border-radius: 4px; color: #fff; text-transform: uppercase;
         outline: 0;
       }
     }
@@ -175,7 +179,7 @@
         line-height: 40px; font-size:13px; text-transform: uppercase;
       }
       button{
-        width: 50%; padding: 12px 0; border: 0; background: #999; border-radius: 4px; color: #fff; text-transform: uppercase; outline: 0;
+        width: 50%; padding: 12px 0; border: 0; background: #6a88b7; border-radius: 4px; color: #fff; text-transform: uppercase; outline: 0;
       }
     }
   }
